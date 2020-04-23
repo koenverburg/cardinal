@@ -1,4 +1,4 @@
-### 👋 Made by [@\koenverburg](https://twitter.com/koenverburg_)
+### 👋 Made by [@koenverburg_](https://twitter.com/koenverburg_)
 
 ### Other projects of mine:
 
