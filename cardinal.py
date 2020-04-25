@@ -68,6 +68,16 @@ class Cardinal(object):
         git.Git().clone(_url)
 
     def initial_cloning(self):
+        # meta
+        total = len(self.projects)
+        cloning_count = sum(
+            map(lambda x: x['is_local'] == False, self.projects))
+        skipping_count = sum(
+            map(lambda x: x['is_local'] == True, self.projects))
+        print(
+            '[i] total repositories: {0}, cloning {1}, skipping {2}'.format(total, cloning_count, skipping_count))
+
+        # cloning
         for project in self.projects:
             if(project.get('is_local') == True):
                 print('[v] Skipping {0}'.format(project.get('name')))
