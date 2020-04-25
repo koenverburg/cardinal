@@ -6,12 +6,13 @@ import requests
 import threading
 import argparse
 import datetime
+from os import path
 
 parser = argparse.ArgumentParser(
-    description='Cardinal - Getting your active repos local in one go')
+    description='Cardinal - Getting your active repositories local in one go')
 
 parser.add_argument(
-    '--months', '-m', help='Get all the repos you pushed to in the last X months')
+    '--months', '-m', help='Limit the amount the repositories being pulled in')
 parser.add_argument('--token', '-t', help='foo help')
 parser.add_argument('--dir', '-d', help='foo help')
 args = parser.parse_args()
@@ -21,8 +22,10 @@ threads = []
 
 class Cardinal(object):
     def start(self):
-        self.clone_list = []
+        self.projects = []
         self.get_projects()
+        self.prepare_to_clone()
+        self.initial_cloning()
 
     def get_projects(self):
         headers = {
@@ -41,22 +44,40 @@ class Cardinal(object):
         amount_of_days = int(30 * int(args.months))
         amount_of_months_back = datetime.datetime.today(
         ) - datetime.timedelta(days=amount_of_days)
-        print(amount_of_months_back)
 
         for repository in _repositories:
             if (datetime.datetime.strptime(repository['pushed_at'], format).date() > amount_of_months_back.date()):
-                self.clone_list.append(repository['ssh_url'])
-        self.clone()
+                project = {
+                    "name": repository['name'],
+                    "url": repository['ssh_url'],
+                    "is_local": False
+                }
+                self.projects.append(project)
+
+    def prepare_to_clone(self):
+        for i, project in enumerate(self.projects):
+            if (path.exists(project['name'])):
+                print('[i] found {0} locally, will skip this later'.format(
+                    project['name']))
+                project.update({'is_local': True})
+            else:
+                print('[i] project: {0}, will be downloaded'.format(
+                    project['name']))
 
     def cmd(self, _url):
         git.Git().clone(_url)
 
-    def clone(self):
-        for url in self.clone_list:
-            print('[i] repo: {0}'.format(url))
-            repo = threading.Thread(target=self.cmd(url))
-            threads.append(repo)
-            repo.start()
+    def initial_cloning(self):
+        for project in self.projects:
+            if(project.get('is_local') == True):
+                print('[v] Skipping {0}'.format(project.get('name')))
+
+            if (project.get('is_local') == False):
+                print('[i] starting thread to clone: {0}'.format(
+                    project.get('name')))
+                repo = threading.Thread(target=self.cmd(project.get('url')))
+                threads.append(repo)
+                repo.start()
 
 
 def main():
