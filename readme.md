@@ -16,9 +16,11 @@ Is useful went setting you are setting up new environments a lot.
 
 ## Todo
 - [] configure the linter for python
-- [] Check if the repo exist and skip that, The idea is that I can run this every time I want it shouldn't break my current repo folder
+- [x] Check if the repo exist and skip that, The idea is that I can run this every time I want it shouldn't break my current repo folder
 - [] if a repo already exists check if it's the git status is dirty (nice to have)
 - []
+
+
 ---
 
 ## For questions you can hit me up on the following platforms
