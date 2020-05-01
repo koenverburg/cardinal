@@ -51,10 +51,10 @@ class Cardinal(object):
   def prepare_to_clone(self):
     for i, project in enumerate(self.projects):
       if (path.exists(project['name'])):
-        print('[i] found {0} locally, will skip this later'.format(project['name']))
+        print('[*] found {0} locally, will skip this later'.format(project['name']))
         project.update({'is_local': True})
       else:
-        print('[i] project: {0}, will be downloaded'.format(project['name']))
+        print('[*] project: {0}, will be downloaded'.format(project['name']))
 
   def cmd(self, _url):
     git.Git().clone(_url)
@@ -64,15 +64,15 @@ class Cardinal(object):
     total = len(self.projects)
     cloning_count = sum(map(lambda x: x['is_local'] == False, self.projects))
     skipping_count = sum(map(lambda x: x['is_local'] == True, self.projects))
-    print('[i] total repositories: {0}, cloning {1}, skipping {2}'.format(total, cloning_count, skipping_count))
+    print('[*] total repositories: {0}, cloning {1}, skipping {2}'.format(total, cloning_count, skipping_count))
 
     # cloning
     for project in self.projects:
       if(project.get('is_local') == True):
-        print('[v] Skipping {0}'.format(project.get('name')))
+        print('[i] Skipping {0}'.format(project.get('name')))
 
       if (project.get('is_local') == False):
-        print('[i] starting thread to clone: {0}'.format(project.get('name')))
+        print('[*] starting thread to clone: {0}'.format(project.get('name')))
         repo = threading.Thread(target=self.cmd(project.get('url')))
         threads.append(repo)
         repo.start()
