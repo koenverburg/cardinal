@@ -19,7 +19,7 @@ Is useful went setting you are setting up new environments a lot.
 - [x] configure the linter for python
 - [] if a repo already exists check if it's the git status is dirty (nice to have)
 - [] Opt for parallel cloning
-- [] Add verbose flag and logic
+- [x] Add verbosity, just more extensive logging, not style
 - [] Add Metasploit style logging
 - [] Add cli colors
 - []
