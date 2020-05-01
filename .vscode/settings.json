@@ -1,5 +1,11 @@
 {
   "cSpell.words": [
     "strptime"
-  ]
+  ],
+  "python.formatting.autopep8Args": [
+    "--ignore E121"
+  ],
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.formatting.provider": "autopep8"
 }
