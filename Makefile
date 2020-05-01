@@ -1,5 +1,5 @@
 freeze:
-	pip freeze > requirements.txt
+	pipreqs . --force
 
 install:
 	pip install -r requirements.txt
