@@ -23,7 +23,6 @@ Is useful went setting you are setting up new environments a lot.
 - [] Add Metasploit style logging
 - [] Add cli colors
 - []
-
 ---
 
 ## For questions you can hit me up on the following platforms
