@@ -6,6 +6,6 @@ What I need to do is to rewrite the program to do the following:
 
 - Start getting all the repositories from github
 - start spawning threads for easy of the repositories that are found
-  - each thread will check if it exists locally
-  - each thread will start cloning the repo it it's not found locally
+  - each thread will check if it exists locally (done)
+  - each thread will start cloning the repo it it's not found locally (done)
   - when a thread is done it should be disposed of automatically
