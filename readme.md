@@ -2,7 +2,7 @@
 
 ### Other projects of mine:
 
-- [Dotfiles](https://github.com/koenverburg/dotfiles) - My dotfiles for Windows and MacOs
+- [Dotfiles](https://github.com/koenverburg/dotfiles) - My dotfiles for Windows and MacOS
 
 ---
 
