@@ -1,4 +1,5 @@
 import git
+import os
 
 from src import Utils
 
@@ -13,7 +14,9 @@ class Repository(object):
 
   def can_clone(self, name):
     if (Utils.is_local(name)):
-      print('[*] found {0} locally, will skip this later'.format(name))
+      repo_path = os.path.join(os.getcwd(), name)
+      is_dirty = git.Repo(repo_path).is_dirty()
+      print('[*] found {0} locally, skipping! - working = {1}'.format(name, is_dirty))
       return False
     else:
       print('[*] project: {0}, will be downloaded'.format(name))
